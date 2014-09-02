@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Complex Polylines</title>
+    <style>
+      html, body, #map-canvas {
+        height: 100%;
+        margin: 0px;
+        padding: 0px
+      }
+    </style>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+    <script>
+// This example creates an interactive map which constructs a
+// polyline based on user clicks. Note that the polyline only appears
+// once its path property contains two LatLng coordinates.
+
+var poly;
+var map;
+var array = new Array();
+
+function initialize() {
+  var mapOptions = {
+    zoom: 7,
+    // Center the map on Chicago, USA.
+    center: new google.maps.LatLng(23.5000, 120.7800)
+  };
+
+  map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+
+  init();
+  
+  var polyOptions = {
+	path: array,
+	geodesic: true,
+    strokeColor: '#000000',
+    strokeOpacity: 1.0,
+    strokeWeight: 3
+  };
+  poly = new google.maps.Polyline(polyOptions);
+  poly.setMap(map);
+
+  // Add a listener for the click event
+ // google.maps.event.addListener(map, 'click', addLatLng);
+}
+
+/**
+ * Handles click events on a map, and adds a new point to the Polyline.
+ * @param {google.maps.MouseEvent} event
+ */
+function init() {
+	for(var i=0;i<AndroidFunction.getNumber();i++) {
+		var myLatlng = new google.maps.LatLng(AndroidFunction.getLat(i), AndroidFunction.getLon(i));
+		var marker = new google.maps.Marker({
+			position: myLatlng,
+			map: map,
+		});
+		array.push(myLatlng);
+	}
+}
+ 
+ 
+ /*function addLatLng(lat, lon) {
+
+  var path = poly.getPath();
+  var latlng = new google.maps.LatLng(lat, lon)
+
+  // Because path is an MVCArray, we can simply append a new coordinate
+  // and it will automatically appear.
+  path.push(latlng);
+
+  // Add a new marker at the new plotted point on the polyline.
+  var marker = new google.maps.Marker({
+    position: latlng,
+    title: '#' + path.getLength(),
+    map: map
+  });
+}*/
+
+google.maps.event.addDomListener(window, 'load', initialize);
+
+    </script>
+  </head>
+  <body>
+    <div id="map-canvas"></div>
+  </body>
+</html>
