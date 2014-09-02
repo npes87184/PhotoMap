@@ -1,6 +1,6 @@
 PhotoMap
 ========
-An opem source android app for marking the pictures exif gps information into map
+An opem source android app for marking the gps information of exif of the pictures into map
 
 Latest Version
 ========
@@ -13,7 +13,7 @@ Changelog
 
 Features
 ========
-1. light weight and no AD transformer
+1. light weight and no AD
 2. support share to Line, FaceBook, etc
 3. online check version support
 
